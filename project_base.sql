@@ -10,7 +10,6 @@ telefono varchar(10) not null
 create table if not exists restaurant(
 id_restaurant int auto_increment primary key,
 id_pedido int,
-foreign key (id_pedido) references pedido(id_pedido) on delete cascade,
 nombre varchar(20) not null,
 telefono int
 );
@@ -18,22 +17,32 @@ telefono int
 create table if not exists pedido(
 id_pedido int auto_increment primary key,
 id_cliente int,
-foreign key (id_cliente) references cliente(id_cliente),
+foreign key (id_cliente) references cliente(id_cliente) on delete cascade,
 id_restaurant int,
-foreign key (id_restaurant) references restaurant(id_restaurant),
-precio float not null,
-tiempo_preparacion float
+foreign key (id_restaurant) references restaurant(id_restaurant) on delete cascade,
+productos varchar(255),
+cantidades varchar(255),
+suma_precio float not null,
+tiempo_preparacion float,
+estado varchar(10)
 );
+
+ALTER TABLE restaurant ADD CONSTRAINT FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido) on delete cascade;
 
 create table if not exists envio(
 id_envio int auto_increment primary key,
-foreign key (id_cliente) references cliente(id_cliente),
-foreign key (id_pedido) references pedido(id_pedido),
-foreign key (id_restaurant) references restaurant(id_restaurant),
+id_cliente int not null,
+id_pedido int not null,
+id_restaurant int not null,
 direccion varchar(40) not null,
 medio_pago varchar(10) not null,
-precio_envio float not null
+precio_envio float not null,
+estado varchar(10)
 );
-drop database FoodDash;
-show tables;
-describe cliente;
+
+-- alter table envio add constraint foreign key (id_cliente) references cliente(id_cliente) on delete cascade;
+-- alter table envio add constraint foreign key (id_pedido) references pedido(id_pedido) on delete cascade;
+-- alter table envio add constraint foreign key (id_restaurant) references restaurant(id_restaurant) on delete cascade;
+ALTER TABLE envio ADD CONSTRAINT FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente) on delete cascade;
+ALTER TABLE envio ADD CONSTRAINT FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido) on delete cascade;
+ALTER TABLE envio ADD CONSTRAINT FOREIGN KEY (id_restaurant) REFERENCES restaurant(id_restaurant) on delete cascade;
