@@ -4,7 +4,8 @@ import java.sql.*;
 
 public class Connection {
     
-    public static Connection getConnection()throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException
+    public static Connection getConnection()
+            throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException
     {
         String connection = null;
         String username = null;
@@ -18,7 +19,7 @@ public class Connection {
             password = "";
             
             Class.forName(driver).newInstance();
-            
+                    
         }catch(ClassNotFoundException | InstantiationException | IllegalAccessException e){
             System.out.println(e);
         }

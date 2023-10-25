@@ -9,7 +9,7 @@ package com.FoodDash.interfaces;
  * @author d3m0n10
  */
 public interface RestaurantDAO {
-    //void recibir_pedido();
+    //void recibir_pedido(id_pedido);
     void aceptar_pedido();
     void rechazar_pedido();
     void finalizar_pedido();
