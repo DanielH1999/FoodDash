@@ -1,6 +1,7 @@
 package com.FoodDash.dao;
 
-import com.FoodDash.connector.Connection;
+import com.FoodDash.connector.*;
+import com.FoodDash.entities.Restaurant;
 import com.FoodDash.interfaces.RestaurantDAO;
 import java.sql.*;
 import java.util.logging.Level;
@@ -15,9 +16,10 @@ public class RestaurantDAOImpl implements RestaurantDAO {
         Connection conexion = null;
         String consulta = null;
         try {
-            conexion = Connection.getConnection();
+            conexion = (Connection) Connector.getConnection();
             
             //establecer id_restaurant como el id de este restaurant
+            consulta = "select id_restaurant from restaurant where nombre = 'El Tano'";
             //establecer estado como "en proceso"
             //conseguir id_pedido
             //conseguir productos
