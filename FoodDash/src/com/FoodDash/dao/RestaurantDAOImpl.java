@@ -18,12 +18,14 @@ public class RestaurantDAOImpl implements RestaurantDAO {
         try {
             conexion = (Connection) Connector.getConnection();
             
-            //establecer id_restaurant como el id de este restaurant
-            consulta = "select id_restaurant from restaurant where nombre = 'El Tano'";
-            //establecer estado como "en proceso"
             //conseguir id_pedido
+            consulta = "";
+            
+            //establecer estado del pedido como "en proceso"
+            consulta = "update pedido set estado = 'en proceso' where id_restaurant = ? and id_pedido = ?";
+            
             //conseguir productos
-            //conseguir cantidades
+                //conseguir cantidades
             //establecer tiempo_preparacion como el tiempo de preparacion del pedido
             //establecer suma_precio como el precio de todos los productos en el pedido
             //cerrar conexion

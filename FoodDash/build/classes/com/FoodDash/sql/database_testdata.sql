@@ -11,10 +11,10 @@ select * from cliente;
 -- inserto restaurants en la bd
 describe restaurant;
 insert into restaurant values(default, default, default, 'El Tano', '1111111111');
-insert into restaurant (nombre, telefono) values('Taco Bar', '1187654567');
-insert into restaurant (nombre, telefono) values('Hamburgueseria', '1198783412');
-insert into restaurant (nombre, telefono) values('KFC', '1198786567');
-insert into restaurant (nombre, telefono) values('Heladeria que frio', '1123325678');
+insert into restaurant values(default, default, default, 'Taco Bar', '1187654567');
+insert into restaurant values(default, default, default, 'Hamburgueseria', '1198783412');
+insert into restaurant values(default, default, default, 'KFC', '1198786567');
+insert into restaurant values(default, default, default, 'Heladeria que frio', '1123325678');
 
 select * from restaurant;
 
