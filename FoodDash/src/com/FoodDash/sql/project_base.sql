@@ -27,7 +27,7 @@ productos varchar(255),
 cantidades varchar(255),
 suma_precio float not null,
 tiempo_preparacion float,
-estado varchar(11)
+estado varchar(20)
 );
 
 create table if not exists envio(
@@ -36,7 +36,7 @@ id_restaurant int not null,
 direccion varchar(40) not null,
 medio_pago varchar(10) not null,
 precio_envio float not null,
-estado varchar(10)
+estado varchar(20)
 );
 
 ALTER TABLE envio ADD CONSTRAINT FOREIGN KEY (id_restaurant) REFERENCES restaurant(id_restaurant) on delete cascade;
