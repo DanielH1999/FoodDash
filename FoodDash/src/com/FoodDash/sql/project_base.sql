@@ -44,3 +44,5 @@ ALTER TABLE restaurant ADD CONSTRAINT FOREIGN KEY (id_envio) REFERENCES envio(id
 
 -- drop
 drop database FoodDash;
+
+-- que pasa cuando borramos un registro de cliente xor restaurant?

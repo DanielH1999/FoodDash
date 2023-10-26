@@ -4,26 +4,12 @@ import java.sql.*;
 
 public class Connector {
     
-    public static Connector getConnection()
-            throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException
-    {
-        String connection = null;
-        String username = null;
-        String password = null;
-        
-        try
-        {
-            String driver = "com.mysql.cj.jdbc.Driver";
-            connection = "jdbc:mysql://127.0.0.1:3306/FoodDash";
-            username = "root";
-            password = "";
-            
-            Class.forName(driver).newInstance();
-                    
-        }catch(ClassNotFoundException | InstantiationException | IllegalAccessException e){
-            System.out.println(e);
-        }
-        
-        return (Connector) DriverManager.getConnection(connection, username, password);
+    private static final String url = "jdbc:mysql://127.0.0.1:3306/FoodDash";
+    private static final String username = "root";
+    private static final String password = "";
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(url, username, password);
     }
+
 }

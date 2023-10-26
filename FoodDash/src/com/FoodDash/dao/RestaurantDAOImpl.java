@@ -15,22 +15,28 @@ public class RestaurantDAOImpl implements RestaurantDAO {
         //entablar conexion
         Connection conexion = null;
         String consulta = null;
+        int id_restaurant = 1; //cambiar al id del restaurant actual
+        int id_cliente = 11111111; //cambiar al id del cliente correspondiente al pedido
         try {
             conexion = (Connection) Connector.getConnection();
-            
-            //conseguir id_pedido
-            consulta = "";
+            PreparedStatement statement = null;
             
             //establecer estado del pedido como "en proceso"
-            consulta = "update pedido set estado = 'en proceso' where id_restaurant = ? and id_pedido = ?";
+            consulta = "update pedido set estado = 'en proceso' where id_restaurant = ? and id_cliente = ?";
             
+            statement = conexion.prepareStatement(consulta);
+            
+            statement.setInt(1, id_restaurant);
+            statement.setInt(2, id_cliente);
+            
+            statement.execute();
             //conseguir productos
                 //conseguir cantidades
             //establecer tiempo_preparacion como el tiempo de preparacion del pedido
             //establecer suma_precio como el precio de todos los productos en el pedido
             //cerrar conexion
             conexion.close();
-        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(RestaurantDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
