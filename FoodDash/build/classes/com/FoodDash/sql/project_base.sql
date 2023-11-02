@@ -26,7 +26,7 @@ primary key (id_cliente, id_restaurant),
 productos varchar(255),
 cantidades varchar(255),
 suma_precio float not null,
-tiempo_preparacion float,
+tiempo_preparacion int,
 estado varchar(20)
 );
 

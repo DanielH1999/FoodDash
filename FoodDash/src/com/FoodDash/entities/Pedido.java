@@ -1,27 +1,30 @@
 package com.FoodDash.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author AULA7-MAQUINA9
  */
-public class Pedido {
-    private int id_pedido;
-    private int id_cliente;
-    private int id_restaurant;
-    private int producto;
-    private int cantidades;
-    private int suma_precio;
-    private int tiempo_preparacion;
-    private int estado;
+public final class Pedido {
+    private int id_pedido;//                                                    identificador del pedido | numerico
+    private int id_cliente;//                                                   identificador del cliente | DNI
+    private int id_restaurant;//                                                identificador del restaurant | numerico
+    private List<String> productos = new ArrayList<>();//                       lista de productos que el cliente selecciono | ArrayList String
+    private List<String> cantidades = new ArrayList<>();//                      lista de cantidades de cada producto que el cliente selecciono | ArrayList String representa una cantidad del producto de "productos" que comparte indice                  
+    private float suma_precio;//                                                la sumatoria de los precios de los productos y el envio | numerico
+    private int tiempo_preparacion;//                                           cantidad de minutos estimados para la preparacion de un pedido | numerico
+    private int estado;//                                                       estado de preparacion del pedido () | numerico {0 al 3} {"en proceso", "enviado", "entregado", "finalizado"}
 
     public Pedido() {
     }
 
-    public Pedido(int id_pedido, int id_cliente, int id_restaurant, int producto, int cantidades, int suma_precio, int tiempo_preparacion, int estado) {
+    public Pedido(int id_pedido, int id_cliente, int id_restaurant, ArrayList productos, ArrayList cantidades, int suma_precio, int tiempo_preparacion, int estado) {
         this.setId_pedido(id_pedido);
         this.setId_cliente(id_cliente);
         this.setId_restaurant(id_restaurant);
-        this.setProducto(producto);
+        this.setProductos(productos);
         this.setCantidades(cantidades);
         this.setSuma_precio(suma_precio);
         this.setTiempo_preparacion(tiempo_preparacion);
@@ -52,27 +55,37 @@ public class Pedido {
         this.id_restaurant = id_restaurant;
     }
 
-    public int getProducto() {
-        return producto;
+    public List getProducto() {
+        return productos;
     }
 
-    public void setProducto(int producto) {
-        this.producto = producto;
+    public void setProductos(List<String> productos) {
+        this.productos = productos;
     }
 
-    public int getCantidades() {
+    public List getCantidades() {
         return cantidades;
     }
 
-    public void setCantidades(int cantidades) {
+    public void setCantidades(List<String> cantidades) {
         this.cantidades = cantidades;
     }
+    
+    public void addProducto(String producto)
+    {
+        this.productos.add(producto);
+    }
+    
+    public void addCantidad(String cantidad)
+    {
+        this.cantidades.add(cantidad);
+    }
 
-    public int getSuma_precio() {
+    public float getSuma_precio() {
         return suma_precio;
     }
 
-    public void setSuma_precio(int suma_precio) {
+    public void setSuma_precio(float suma_precio) {
         this.suma_precio = suma_precio;
     }
 
@@ -95,7 +108,7 @@ public class Pedido {
     @Override
     public String toString() {
         return "Pedido{" + "id_pedido=" + id_pedido + ", id_cliente=" + id_cliente + ", id_restaurant=" +
-                id_restaurant + ", producto=" + producto + ", cantidades=" + cantidades + ", suma_precio=" +
+                id_restaurant + ", productos=" + productos + ", cantidades=" + cantidades + ", suma_precio=" +
                 suma_precio + ", tiempo_preparacion=" + tiempo_preparacion + ", estado=" + estado + '}';
     }
     

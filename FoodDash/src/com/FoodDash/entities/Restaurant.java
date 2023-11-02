@@ -1,5 +1,8 @@
 package com.FoodDash.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author d3m0n10
@@ -10,6 +13,8 @@ public class Restaurant {
     private int id_envio;
     private String nombre;
     private int telefono;
+    private List<String> productos = new ArrayList<>();
+    private List<String> cantidades = new ArrayList<>();
     
     public Restaurant(){}
 
@@ -61,6 +66,22 @@ public class Restaurant {
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
+    }
+
+    public List<String> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<String> productos) {
+        this.productos = productos;
+    }
+
+    public List<String> getCantidades() {
+        return cantidades;
+    }
+
+    public void setCantidades(List<String> cantidades) {
+        this.cantidades = cantidades;
     }
 
     @Override

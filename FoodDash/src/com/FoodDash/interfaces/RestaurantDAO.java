@@ -4,12 +4,14 @@
  */
 package com.FoodDash.interfaces;
 
+import com.FoodDash.entities.Pedido;
+
 /**
  *
  * @author d3m0n10
  */
 public interface RestaurantDAO {
-    void aceptar_pedido();
-    void rechazar_pedido();
-    void finalizar_pedido();
+    void aceptar_pedido(Pedido pedido);
+    void rechazar_pedido(Pedido pedido);
+    void finalizar_pedido(Pedido pedido);
 }

@@ -22,10 +22,10 @@ select * from restaurant;
 
 -- inserto pedidos en la bd
 describe pedido;
-insert into pedido values (1, 40345765, 3, 'Hamburguesa', '3', '30000', '15', 'listo');
-insert into pedido values (2, 35765123, 2, 'Combo tacos ranchero', '2', '60000', '30', 'en preparacion');
-insert into pedido values (3, 11111111, 1, 'Hamburguesa triple con papas', '4', '160000', '10', 'enviado');
-insert into pedido values (4, 11111112, 2, 'Papas con ceddar', 1, 1500, 15, 'finalizado');
+insert into pedido values (1, 40345765, 3, 'Hamburguesa', '3', 30000, 15, 'listo');
+insert into pedido values (2, 35765123, 2, 'Combo tacos ranchero', '2', 60000, 30, 'en preparacion');
+insert into pedido values (3, 11111111, 1, 'Hamburguesa triple con papas', '4', 160000, 10, 'enviado');
+insert into pedido values (4, 11111112, 2, 'Papas con ceddar', '1', 1500, 15, 'finalizado');
 
 select * from pedido;
 
