@@ -84,12 +84,16 @@ public class Restaurant {
         this.cantidades = cantidades;
     }
 
+//    @Override
+//    public String toString() {
+//        return "id_restaurant: "+id_restaurant+"\nid_pedido: "+id_pedido
+//               +"\nid_envio: "+id_envio+"\nnombre: "+nombre+"\ntelefono: "
+//               +telefono;
+//    }
+    
     @Override
-    public String toString() {
-        return "id_restaurant: "+id_restaurant+"\nid_pedido: "+id_pedido
-               +"\nid_envio: "+id_envio+"\nnombre: "+nombre+"\ntelefono: "
-               +telefono;
+    public String toString()
+    {
+        return nombre + ", " + telefono;
     }
-    
-    
 }

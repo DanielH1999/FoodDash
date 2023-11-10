@@ -9,6 +9,5 @@ package com.FoodDash.interfaces;
  * @author d3m0n10
  */
 public interface EnvioDAO {
-    void recibir_pago();
     void entregar_pedido();
 }

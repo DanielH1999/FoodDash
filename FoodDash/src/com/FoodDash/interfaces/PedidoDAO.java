@@ -9,5 +9,5 @@ package com.FoodDash.interfaces;
  * @author d3m0n10
  */
 public interface PedidoDAO {
-    
+        void recibir_pago();
 }

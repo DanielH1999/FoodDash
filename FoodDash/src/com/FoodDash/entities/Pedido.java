@@ -3,11 +3,10 @@ package com.FoodDash.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author AULA7-MAQUINA9
- */
+
 public final class Pedido {
+    private List<Cliente> clientes;
+    private List<Restaurant> restaurants;
     private int id_pedido;//                                                    identificador del pedido | numerico
     private int id_cliente;//                                                   identificador del cliente | DNI
     private int id_restaurant;//                                                identificador del restaurant | numerico
@@ -15,7 +14,7 @@ public final class Pedido {
     private List<String> cantidades = new ArrayList<>();//                      lista de cantidades de cada producto que el cliente selecciono | ArrayList String representa una cantidad del producto de "productos" que comparte indice                  
     private float suma_precio;//                                                la sumatoria de los precios de los productos y el envio | numerico
     private int tiempo_preparacion;//                                           cantidad de minutos estimados para la preparacion de un pedido | numerico
-    private int estado;//                                                       estado de preparacion del pedido () | numerico {0 al 3} {"en proceso", "enviado", "entregado", "finalizado"}
+    private int estado;//                                                       estado de preparacion del pedido () | numerico {0 al 4} {"pendiente", "en proceso", "listo", "enviado", "finalizado", "rechazado"}
 
     public Pedido() {
     }
@@ -55,7 +54,7 @@ public final class Pedido {
         this.id_restaurant = id_restaurant;
     }
 
-    public List getProducto() {
+    public List getProductos() {
         return productos;
     }
 
@@ -105,11 +104,30 @@ public final class Pedido {
         this.estado = estado;
     }
 
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    public List<Restaurant> getRestaurants() {
+        return restaurants;
+    }
+
+    public void setRestaurants(List<Restaurant> restaurants) {
+        this.restaurants = restaurants;
+    }
+    
+    
+
     @Override
     public String toString() {
-        return "Pedido{" + "id_pedido=" + id_pedido + ", id_cliente=" + id_cliente + ", id_restaurant=" +
-                id_restaurant + ", productos=" + productos + ", cantidades=" + cantidades + ", suma_precio=" +
-                suma_precio + ", tiempo_preparacion=" + tiempo_preparacion + ", estado=" + estado + '}';
+        return "id_pedido=" + id_pedido + "\nid_cliente=" + id_cliente + "\nid_restaurant=" +
+                id_restaurant + "\nproductos=" + productos + "\ncantidades=" + cantidades + "\nsuma_precio=" +
+                suma_precio + "\ntiempo_preparacion=" + tiempo_preparacion + "\nestado=" + estado+
+                "\nclientes: " + clientes + "\nrestaurants: " + restaurants;
     }
     
     
