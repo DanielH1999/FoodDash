@@ -57,6 +57,11 @@ public final class Pedido {
     public List getProductos() {
         return productos;
     }
+    
+    public String getProductosString()
+    {
+        return String.join(", ", getProductos());
+    }
 
     public void setProductos(List<String> productos) {
         this.productos = productos;
@@ -64,6 +69,11 @@ public final class Pedido {
 
     public List getCantidades() {
         return cantidades;
+    }
+    
+    public String getCantidadesString()
+    {
+        return String.join(", ", getCantidades());
     }
 
     public void setCantidades(List<String> cantidades) {
