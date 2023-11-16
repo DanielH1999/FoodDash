@@ -4,8 +4,15 @@ import com.FoodDash.dao.RestaurantDAOImpl;
 import com.FoodDash.entities.Restaurant;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -154,7 +161,7 @@ public class Ventana extends javax.swing.JFrame
         });
 
         menuBg.setBackground(new java.awt.Color(255, 255, 255));
-        menuBg.setLayout(new java.awt.GridLayout(menuItems, 2));
+        menuBg.setLayout(new java.awt.GridLayout(menuItems, 3));
         menuScroll.setViewportView(menuBg);
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
@@ -402,6 +409,7 @@ public class Ventana extends javax.swing.JFrame
         {
             menuTitleLbl.setText("Menu de "+selectedRestaurant.getNombre());
             content.moveToFront(menuPanel);
+            updateMenu(selectedRestaurant.getNombre());
         }
     }//GEN-LAST:event_seeMenuBtnActionPerformed
 
@@ -457,6 +465,38 @@ public class Ventana extends javax.swing.JFrame
         cardNumberTxt.setEnabled(b);
         expiryDateLbl.setEnabled(b);
         expiryDateTxt.setEnabled(b);
+    }
+    
+    private void updateMenu(String restaurant)
+    {
+        menuBg.removeAll();
+        restaurant = restaurant.replace(" ", ""); // sacar los espacios del nombre del restaurant
+        String imagePath = "src/com/FoodDash/gui/"+restaurant+"/"; //buscar el paquete con las imagenes de dicho restaurant
+        File imageDir = new File(imagePath);
+        File[] images = imageDir.listFiles();
+        
+        try
+        {
+            JSpinner[] amounts = null;
+            for (int i = 0; i < images.length; i++)
+            {
+                ImageIcon icon = new ImageIcon(images[i].getPath());
+                Image image = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                ImageIcon newIcon = new ImageIcon(image);
+                JLabel iconLabel = new JLabel(newIcon);
+                JLabel descriptionLabel = new JLabel();
+                descriptionLabel.setText(images[i].getName().substring(0, images[i].getName().indexOf(".")));
+                
+                amounts[i] = new JSpinner();
+                menuBg.add(iconLabel);
+                menuBg.add(descriptionLabel);
+                menuBg.add(amounts[i]);
+            }
+        }
+        catch(NullPointerException e)
+        {
+            menuBg.add(new JLabel("no hay un menu disponible para el restaurant seleccionado! "+e));
+        }
     }
     /**
      * @param args the command line arguments
