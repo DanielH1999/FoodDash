@@ -294,7 +294,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="cardInfoSeparator" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
@@ -302,25 +302,9 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="forwardBtn" pref="439" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cardNumberLbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="phoneLbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="addrLbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="nameLbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="expiryDateLbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="nameTxt" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="addrTxt" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="phoneTxt" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="cardNumberTxt" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="expiryDateTxt" pref="150" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
                           <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="priceLbl" min="-2" pref="152" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="jLabel2" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
@@ -329,10 +313,30 @@
                                       <Component id="cardButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cardIconLbl" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cardNumberLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="phoneLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="addrLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="nameLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="expiryDateLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="dniLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="dniTxt" max="32767" attributes="0"/>
+                                  <Component id="nameTxt" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="addrTxt" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="phoneTxt" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cardNumberTxt" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="expiryDateTxt" pref="150" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -353,9 +357,14 @@
                           <Component id="phoneLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="phoneTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="dniLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="dniTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="cardInfoSeparator" min="-2" pref="8" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cardNumberLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cardNumberTxt" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -366,18 +375,24 @@
                           <Component id="expiryDateTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cardButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cashButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="cardButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cashButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="priceLbl" max="32767" attributes="0"/>
+                          <Component id="cardIconLbl" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="forwardBtn" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                           <Component id="backToMenuBtn" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -398,6 +413,11 @@
                 <Property name="text" type="java.lang.String" value="Telefono"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JLabel" name="dniLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="DNI"/>
+              </Properties>
+            </Component>
             <Component class="javax.swing.JLabel" name="cardNumberLbl">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Numero de tarjeta"/>
@@ -413,6 +433,8 @@
             <Component class="javax.swing.JTextField" name="addrTxt">
             </Component>
             <Component class="javax.swing.JTextField" name="phoneTxt">
+            </Component>
+            <Component class="javax.swing.JTextField" name="dniTxt">
             </Component>
             <Component class="javax.swing.JTextField" name="cardNumberTxt">
             </Component>
@@ -469,6 +491,18 @@
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Metodo de pago"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="priceLbl">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="price"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="cardIconLbl">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Icon"/>
               </Properties>
             </Component>
           </SubComponents>

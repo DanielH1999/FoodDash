@@ -1,6 +1,7 @@
 package com.FoodDash.gui;
 
 import com.FoodDash.dao.RestaurantDAOImpl;
+import com.FoodDash.entities.Cliente;
 import com.FoodDash.entities.Restaurant;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,6 +9,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.Arrays;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -31,6 +33,7 @@ public class Ventana extends javax.swing.JFrame
     Restaurant selectedRestaurant;
     String[] pedido;
     int menuItems = 5;
+    JSpinner[] amounts;
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -55,11 +58,13 @@ public class Ventana extends javax.swing.JFrame
         nameLbl = new javax.swing.JLabel();
         addrLbl = new javax.swing.JLabel();
         phoneLbl = new javax.swing.JLabel();
+        dniLbl = new javax.swing.JLabel();
         cardNumberLbl = new javax.swing.JLabel();
         expiryDateLbl = new javax.swing.JLabel();
         nameTxt = new javax.swing.JTextField();
         addrTxt = new javax.swing.JTextField();
         phoneTxt = new javax.swing.JTextField();
+        dniTxt = new javax.swing.JTextField();
         cardNumberTxt = new javax.swing.JTextField();
         expiryDateTxt = new javax.swing.JTextField();
         forwardBtn = new javax.swing.JButton();
@@ -68,6 +73,8 @@ public class Ventana extends javax.swing.JFrame
         cardButton = new javax.swing.JRadioButton();
         cashButton = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
+        priceLbl = new javax.swing.JLabel();
+        cardIconLbl = new javax.swing.JLabel();
         orderInfoPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         orderCancelButton = new javax.swing.JButton();
@@ -201,6 +208,8 @@ public class Ventana extends javax.swing.JFrame
 
         phoneLbl.setText("Telefono");
 
+        dniLbl.setText("DNI");
+
         cardNumberLbl.setText("Numero de tarjeta");
 
         expiryDateLbl.setText("Fecha de expiracion");
@@ -241,42 +250,52 @@ public class Ventana extends javax.swing.JFrame
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Metodo de pago");
 
+        priceLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        priceLbl.setText("price");
+
+        cardIconLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cardIconLbl.setText("Icon");
+
         javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
         loginPanel.setLayout(loginPanelLayout);
         loginPanelLayout.setHorizontalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cardInfoSeparator, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
                         .addComponent(backToMenuBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(forwardBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
-                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cardNumberLbl)
-                            .addComponent(phoneLbl)
-                            .addComponent(addrLbl)
-                            .addComponent(nameLbl)
-                            .addComponent(expiryDateLbl))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nameTxt)
-                            .addComponent(addrTxt)
-                            .addComponent(phoneTxt)
-                            .addComponent(cardNumberTxt)
-                            .addComponent(expiryDateTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
                     .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(priceLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(loginPanelLayout.createSequentialGroup()
                                 .addComponent(cashButton)
                                 .addGap(10, 10, 10)
                                 .addComponent(cardButton)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cardIconLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cardNumberLbl)
+                            .addComponent(phoneLbl)
+                            .addComponent(addrLbl)
+                            .addComponent(nameLbl)
+                            .addComponent(expiryDateLbl)
+                            .addComponent(dniLbl))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dniTxt)
+                            .addComponent(nameTxt)
+                            .addComponent(addrTxt)
+                            .addComponent(phoneTxt)
+                            .addComponent(cardNumberTxt)
+                            .addComponent(expiryDateTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
+                .addGap(6, 6, 6))
         );
         loginPanelLayout.setVerticalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,9 +311,13 @@ public class Ventana extends javax.swing.JFrame
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneLbl)
                     .addComponent(phoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dniLbl)
+                    .addComponent(dniTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cardInfoSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cardNumberLbl)
                     .addComponent(cardNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -303,16 +326,20 @@ public class Ventana extends javax.swing.JFrame
                     .addComponent(expiryDateLbl)
                     .addComponent(expiryDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cardButton)
-                    .addComponent(cashButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cardButton)
+                            .addComponent(cashButton)))
+                    .addComponent(priceLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cardIconLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(forwardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backToMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
 
         orderInfoPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -413,17 +440,24 @@ public class Ventana extends javax.swing.JFrame
         }
     }//GEN-LAST:event_seeMenuBtnActionPerformed
 
-    private void backToMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMenuBtnActionPerformed
-        content.moveToFront(menuPanel);
-    }//GEN-LAST:event_backToMenuBtnActionPerformed
-
     private void orderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderBtnActionPerformed
-        content.moveToFront(loginPanel);
+        if(hasOrdered(getOrderAmounts(amounts)))
+        {
+            System.out.println(Arrays.toString(getOrderAmounts(amounts)));
+            cardIconLbl.setText("");
+            priceLbl.setText("$");
+            content.moveToFront(loginPanel);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "No se selecciono nada del menu", "No hay seleccion", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_orderBtnActionPerformed
 
-    private void forwardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forwardBtnActionPerformed
-        content.moveToFront(orderInfoPanel);
-    }//GEN-LAST:event_forwardBtnActionPerformed
+    private void orderCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderCancelButtonActionPerformed
+        JOptionPane.showMessageDialog(this, "El pedido fue exitosamente cancelado", "Pedido alterado", JOptionPane.INFORMATION_MESSAGE);
+        content.moveToFront(restaurantPanel);
+    }//GEN-LAST:event_orderCancelButtonActionPerformed
 
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashButtonActionPerformed
         hideCardInfo(true);
@@ -433,10 +467,31 @@ public class Ventana extends javax.swing.JFrame
         hideCardInfo(false);
     }//GEN-LAST:event_cardButtonActionPerformed
 
-    private void orderCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderCancelButtonActionPerformed
-        JOptionPane.showMessageDialog(this, "El pedido fue exitosamente cancelado", "Pedido alterado", JOptionPane.INFORMATION_MESSAGE);
-        content.moveToFront(restaurantPanel);
-    }//GEN-LAST:event_orderCancelButtonActionPerformed
+    private void backToMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMenuBtnActionPerformed
+        content.moveToFront(menuPanel);
+    }//GEN-LAST:event_backToMenuBtnActionPerformed
+
+    private void forwardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forwardBtnActionPerformed
+        try
+        {
+            if (cashButton.isSelected())
+            {
+                String cardNumber = cardNumberTxt.getText();
+                String cardExpiry = expiryDateTxt.getText();
+            }
+            Cliente cliente = new Cliente();
+            cliente.setId(Integer.parseInt(dniTxt.getText()));
+            cliente.setNombre(nameTxt.getText().toLowerCase());
+            cliente.setTelefono(Integer.parseInt(phoneTxt.getText()));
+            cliente.setDireccion(addrTxt.getText().toLowerCase());
+            System.out.println(cliente);
+            content.moveToFront(orderInfoPanel);
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this, e, "Hubo un error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_forwardBtnActionPerformed
 
     private void updateRestaurantList()
     {
@@ -465,6 +520,7 @@ public class Ventana extends javax.swing.JFrame
         cardNumberTxt.setEnabled(b);
         expiryDateLbl.setEnabled(b);
         expiryDateTxt.setEnabled(b);
+        cardIconLbl.setVisible(b);
     }
     
     private void updateMenu(String restaurant)
@@ -477,7 +533,7 @@ public class Ventana extends javax.swing.JFrame
         
         try
         {
-            JSpinner[] amounts = null;
+            amounts = new JSpinner[images.length];
             for (int i = 0; i < images.length; i++)
             {
                 ImageIcon icon = new ImageIcon(images[i].getPath());
@@ -486,7 +542,6 @@ public class Ventana extends javax.swing.JFrame
                 JLabel iconLabel = new JLabel(newIcon);
                 JLabel descriptionLabel = new JLabel();
                 descriptionLabel.setText(images[i].getName().substring(0, images[i].getName().indexOf(".")));
-                
                 amounts[i] = new JSpinner();
                 menuBg.add(iconLabel);
                 menuBg.add(descriptionLabel);
@@ -495,8 +550,34 @@ public class Ventana extends javax.swing.JFrame
         }
         catch(NullPointerException e)
         {
-            menuBg.add(new JLabel("no hay un menu disponible para el restaurant seleccionado! "+e));
+            menuBg.add(new JLabel("¡Hubo un error:! "+e));
         }
+    }
+    
+    private int[] getOrderAmounts(JSpinner[] amounts)
+    {
+        int[] values = new int[amounts.length];
+        
+        for (int i = 0; i < amounts.length; i++) {
+            values[i] = (int) amounts[i].getValue();
+            if (values[i] < 0)
+            {
+                values[i] = 0;
+            }
+        }
+        return values;
+    }
+    
+    private boolean hasOrdered(int[] values)
+    {
+        for (int i = 0; i < values.length; i++)
+        {
+            if (values[i] > 0)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     /**
      * @param args the command line arguments
@@ -542,11 +623,14 @@ public class Ventana extends javax.swing.JFrame
     private javax.swing.JButton backToMenuBtn;
     private javax.swing.JButton backToRestaurantBtn;
     private javax.swing.JRadioButton cardButton;
+    private javax.swing.JLabel cardIconLbl;
     private javax.swing.JSeparator cardInfoSeparator;
     private javax.swing.JLabel cardNumberLbl;
     private javax.swing.JTextField cardNumberTxt;
     private javax.swing.JRadioButton cashButton;
     private javax.swing.JLayeredPane content;
+    private javax.swing.JLabel dniLbl;
+    private javax.swing.JTextField dniTxt;
     private javax.swing.JLabel expiryDateLbl;
     private javax.swing.JTextField expiryDateTxt;
     private javax.swing.JButton forwardBtn;
@@ -566,6 +650,7 @@ public class Ventana extends javax.swing.JFrame
     private javax.swing.JPanel orderInfoPanel;
     private javax.swing.JLabel phoneLbl;
     private javax.swing.JTextField phoneTxt;
+    private javax.swing.JLabel priceLbl;
     private javax.swing.JList<String> restaurantList;
     private javax.swing.JPanel restaurantPanel;
     private javax.swing.JLabel restaurantTitleLbl;

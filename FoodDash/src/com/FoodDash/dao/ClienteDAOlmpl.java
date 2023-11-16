@@ -57,7 +57,7 @@ public void ingresarDatos(Cliente c) throws SQLException {
     }
     
     
-public void realizarPedido(Cliente c, Pedido p, int idR) throws SQLException {
+public void realizarPedido(Cliente c, Pedido p, Restaurant r) throws SQLException {
         Connection conexion = Connector.getConnection();
         
         String insercionPedido = "INSERT INTO pedido(id_cliente, id_restaurant, productos, cantidades, suma_precio, tiempo_preparacion, estado) values (?, ?, ?, ?, ?, ?, ?)";
@@ -65,7 +65,7 @@ public void realizarPedido(Cliente c, Pedido p, int idR) throws SQLException {
         PreparedStatement segundaSentencia = conexion.prepareStatement(insercionPedido);
                 
         segundaSentencia.setInt(1, c.getId());
-        segundaSentencia.setInt(2, idR);
+        segundaSentencia.setInt(2, r.getId_restaurant());
         segundaSentencia.setString(3, p.getProductosString());
         segundaSentencia.setString(4, p.getCantidadesString());
         segundaSentencia.setFloat(5, p.getSuma_precio());
