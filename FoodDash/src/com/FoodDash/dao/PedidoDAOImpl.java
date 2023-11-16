@@ -12,7 +12,7 @@ import com.FoodDash.entities.Pedido;
 
 public class PedidoDAOImpl implements PedidoDAO{
 
-    public List<Restaurant> getAllRestaurants(Pedido pedido) throws SQLException
+    public static List<Restaurant> getAllRestaurants(Pedido pedido) throws SQLException
     {
         Connection conexion = (Connection) Connector.getConnection();
         
@@ -30,20 +30,37 @@ public class PedidoDAOImpl implements PedidoDAO{
                 restaurant.setTelefono(Database.getInt("telefono"));
                 restaurants.add(restaurant);
             }
-            pedido.setRestaurants(restaurants);
             //pasarlos a pedido para enlazar
-            
+            conexion.close();
+            return restaurants;
     }
     
-    public void getAllClients(Pedido pedido)
+    public static List<Cliente> getAllClients(Pedido pedido) throws SQLException
     {
-        throw new UnsupportedOperationException("No implementado");
+        Connection conexion = (Connection) Connector.getConnection();
+        
         List<Cliente> clientes = new ArrayList<>();
+        
+        PreparedStatement statement = conexion.prepareStatement("select * from cliente");
+        ResultSet Database = statement.executeQuery();
+        
+        while (Database.next())
+        {
+            Cliente cliente = new Cliente();
+            cliente.setId(Database.getInt("id_cliente"));
+            cliente.setNombre(Database.getString("nombre"));
+            cliente.setDireccion(Database.getString("direccion"));
+            cliente.setTelefono(Database.getInt("telefono"));
+            clientes.add(cliente);
+        }
+        conexion.close();
+        return clientes;
     }
     
     @Override
     public void recibir_pago() {
         throw new UnsupportedOperationException("No implementado");
+        //cambiar el estado
     }
     
 }

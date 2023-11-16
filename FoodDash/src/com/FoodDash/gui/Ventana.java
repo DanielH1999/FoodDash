@@ -6,8 +6,6 @@ import com.FoodDash.entities.Restaurant;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Arrays;
 import javax.swing.DefaultListModel;
@@ -15,8 +13,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
-import javax.swing.table.DefaultTableModel;
-
 
 public class Ventana extends javax.swing.JFrame
 {
@@ -566,6 +562,20 @@ public class Ventana extends javax.swing.JFrame
             }
         }
         return values;
+    }
+    
+    private String[] getOrderItems(int[] values)
+    {
+        String imagePath = "src/com/FoodDash/gui/"+selectedRestaurant.getNombre()+"/";
+        File imageDir = new File(imagePath);
+        File[] images = imageDir.listFiles();
+        String[] items = new String[images.length];
+        
+        for (int i = 0; i < images.length; i++)
+        {
+            items[i] = images[i].getName().substring(0, images[i].getName().indexOf("."));
+        }
+        return items;
     }
     
     private boolean hasOrdered(int[] values)
