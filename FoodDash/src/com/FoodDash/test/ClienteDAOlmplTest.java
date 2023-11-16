@@ -26,7 +26,7 @@ public class ClienteDAOlmplTest {
 
          ClienteDAOlmpl clienteDAOlmpl = new ClienteDAOlmpl();
          
-         clienteDAOlmpl.realizarPedido(cliente,pedido, restaurante);
+         clienteDAOlmpl.realizarPedido(cliente,pedido, 1);
          
          System.out.println(pedido.toString());
     }
