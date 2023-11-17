@@ -2,6 +2,7 @@ package com.FoodDash.gui;
 
 import com.FoodDash.dao.RestaurantDAOImpl;
 import com.FoodDash.entities.Cliente;
+import com.FoodDash.entities.Pedido;
 import com.FoodDash.entities.Restaurant;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -27,11 +28,9 @@ public class Ventana extends javax.swing.JFrame
 
     DefaultListModel listModel = new DefaultListModel();
     Restaurant selectedRestaurant;
-    String[] pedido;
     int menuItems = 5;
     JSpinner[] amounts;
-    int idR;
-    Cliente cliente = new Cliente();
+    Pedido pedido;
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -432,17 +431,34 @@ public class Ventana extends javax.swing.JFrame
     private void seeMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeMenuBtnActionPerformed
         if(selectRestaurant())
         {
+            pedido = new Pedido();
+            pedido.setId_restaurant(selectedRestaurant.getId_restaurant());
+            
             menuTitleLbl.setText("Menu de "+selectedRestaurant.getNombre());
             content.moveToFront(menuPanel);
             updateMenu(selectedRestaurant.getNombre());
-            idR = selectedRestaurant.getId_restaurant();
         }
     }//GEN-LAST:event_seeMenuBtnActionPerformed
 
     private void orderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderBtnActionPerformed
         if(hasOrdered(getOrderAmounts(amounts)))
         {
-            System.out.println(Arrays.toString(getOrderAmounts(amounts)));
+            String[] cantidades = new String[amounts.length];
+            int[] values = getOrderAmounts(amounts);
+            
+            for (int i = 0; i < amounts.length; i++)
+            {
+                cantidades[i] = String.valueOf(values[i]);
+            }
+            
+            String[] productos = getOrderItems(values);
+            
+            pedido.setProductos(Arrays.asList(productos));
+            pedido.setCantidades(Arrays.asList(cantidades));
+            
+            System.out.println(Arrays.toString(productos));
+            System.out.println(Arrays.toString(cantidades));
+            
             cardIconLbl.setText("");
             priceLbl.setText("$");
             content.moveToFront(loginPanel);
@@ -454,7 +470,14 @@ public class Ventana extends javax.swing.JFrame
     }//GEN-LAST:event_orderBtnActionPerformed
 
     private void orderCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderCancelButtonActionPerformed
+        //System.out.println("Pedido a cancelar: "+pedido);
+        
+        pedido = new Pedido();
+        java.lang.System.gc();
+        
         JOptionPane.showMessageDialog(this, "El pedido fue exitosamente cancelado", "Pedido alterado", JOptionPane.INFORMATION_MESSAGE);
+        //System.out.println("Resultado: "+pedido);
+        
         content.moveToFront(restaurantPanel);
     }//GEN-LAST:event_orderCancelButtonActionPerformed
 
@@ -483,7 +506,11 @@ public class Ventana extends javax.swing.JFrame
             cliente.setNombre(nameTxt.getText().toLowerCase());
             cliente.setTelefono(Integer.parseInt(phoneTxt.getText()));
             cliente.setDireccion(addrTxt.getText().toLowerCase());
+            
             System.out.println(cliente);
+            
+            pedido.setId_cliente(cliente.getId());
+            
             content.moveToFront(orderInfoPanel);
         }
         catch(NumberFormatException e)
@@ -496,23 +523,6 @@ public class Ventana extends javax.swing.JFrame
     {
         listModel.addAll(RestaurantDAOImpl.getRestaurantList());
     }
-
-public void updateCliente() {
-        int dniCliente = Integer.getInteger(phoneTxt.getText());
-        cliente.setId(dniCliente);
-        cliente.setNombre(nameTxt.getText());
-        cliente.setDireccion(addrTxt.getText());
-        cliente.setTelefono(Integer.getInteger(phoneTxt.getText()));
-        
-        ClienteDAOlmpl cdao = new ClienteDAOlmpl();
-        
-        try {
-            cdao.ingresarDatos(cliente);
-        } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(this, "Por favor ingresar sus datos personales de forma completa");
-        }
-        
-}
     
     private boolean selectRestaurant()
     {
@@ -586,14 +596,24 @@ public void updateCliente() {
     
     private String[] getOrderItems(int[] values)
     {
-        String imagePath = "src/com/FoodDash/gui/"+selectedRestaurant.getNombre()+"/";
+        System.out.println("getOrderItems() DEBUG");
+        System.out.println(selectedRestaurant.getNombre());
+        
+        String imagePath = "src/com/FoodDash/gui/"+selectedRestaurant.getNombre().replace(" ", "")+"/";
         File imageDir = new File(imagePath);
         File[] images = imageDir.listFiles();
         String[] items = new String[images.length];
         
         for (int i = 0; i < images.length; i++)
         {
-            items[i] = images[i].getName().substring(0, images[i].getName().indexOf("."));
+            if (values[i] > 0)
+            {
+                items[i] = images[i].getName().substring(0, images[i].getName().indexOf("."));
+            }
+            else
+            {
+                items[i] = "";
+            }
         }
         return items;
     }
