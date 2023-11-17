@@ -30,6 +30,8 @@ public class Ventana extends javax.swing.JFrame
     String[] pedido;
     int menuItems = 5;
     JSpinner[] amounts;
+    int idR;
+    Cliente cliente = new Cliente();
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
