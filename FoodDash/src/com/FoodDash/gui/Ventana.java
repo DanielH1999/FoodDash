@@ -1,5 +1,6 @@
 package com.FoodDash.gui;
 
+import com.FoodDash.dao.ClienteDAOlmpl;
 import com.FoodDash.dao.RestaurantDAOImpl;
 import com.FoodDash.entities.Cliente;
 import com.FoodDash.entities.Pedido;
@@ -8,6 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.io.File;
+import java.sql.SQLException;
 import java.util.Arrays;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -31,6 +33,8 @@ public class Ventana extends javax.swing.JFrame
     int menuItems = 5;
     JSpinner[] amounts;
     Pedido pedido;
+	int idR;
+    Cliente cliente = new Cliente();
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -437,6 +441,7 @@ public class Ventana extends javax.swing.JFrame
             menuTitleLbl.setText("Menu de "+selectedRestaurant.getNombre());
             content.moveToFront(menuPanel);
             updateMenu(selectedRestaurant.getNombre());
+	idR = selectedRestaurant.getId_restaurant();
         }
     }//GEN-LAST:event_seeMenuBtnActionPerformed
 
@@ -579,6 +584,23 @@ public class Ventana extends javax.swing.JFrame
             menuBg.add(new JLabel("¡Hubo un error:! "+e));
         }
     }
+	
+	public void updateCliente() {
+        int dniCliente = Integer.getInteger(phoneTxt.getText());
+        cliente.setId(dniCliente);
+        cliente.setNombre(nameTxt.getText());
+        cliente.setDireccion(addrTxt.getText());
+        cliente.setTelefono(Integer.getInteger(phoneTxt.getText()));
+
+        ClienteDAOlmpl cdao = new ClienteDAOlmpl();
+
+        try {
+            cdao.ingresarDatos(cliente);
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(this, "Por favor ingresar sus datos personales de forma completa");
+        }
+
+}
     
     private int[] getOrderAmounts(JSpinner[] amounts)
     {

@@ -9,6 +9,9 @@ package com.FoodDash.interfaces;
  * @author d3m0n10
  */
 public interface ClienteDAO {
+	void ingresar_cliente();
+	void actualizar_cliente();
+
     void elegir_restaurant();
     void seleccionar_producto();
     void eliminar_producto();
