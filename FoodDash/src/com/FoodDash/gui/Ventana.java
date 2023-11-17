@@ -493,6 +493,23 @@ public class Ventana extends javax.swing.JFrame
     {
         listModel.addAll(RestaurantDAOImpl.getRestaurantList());
     }
+
+public void updateCliente() {
+        int dniCliente = Integer.getInteger(phoneTxt.getText());
+        cliente.setId(dniCliente);
+        cliente.setNombre(nameTxt.getText());
+        cliente.setDireccion(addrTxt.getText());
+        cliente.setTelefono(Integer.getInteger(phoneTxt.getText()));
+        
+        ClienteDAOlmpl cdao = new ClienteDAOlmpl();
+        
+        try {
+            cdao.ingresarDatos(cliente);
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(this, "Por favor ingresar sus datos personales de forma completa");
+        }
+        
+}
     
     private boolean selectRestaurant()
     {
