@@ -435,6 +435,7 @@ public class Ventana extends javax.swing.JFrame
             menuTitleLbl.setText("Menu de "+selectedRestaurant.getNombre());
             content.moveToFront(menuPanel);
             updateMenu(selectedRestaurant.getNombre());
+            idR = selectedRestaurant.getId_restaurant();
         }
     }//GEN-LAST:event_seeMenuBtnActionPerformed
 
