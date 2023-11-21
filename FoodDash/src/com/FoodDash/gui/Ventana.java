@@ -694,6 +694,28 @@ public class Ventana extends javax.swing.JFrame
         }
         return false;
     }
+
+	private int getTotalPedido(String[] nombresPlatos, Integer[] cantidades) {
+        int total = 0;
+        try {
+            JSONObject menu = new JSONObject(menuJson);
+            for (int i = 0; i < nombresPlatos.length; i++) {
+                String nombrePlato = nombresPlatos[i];
+                int cantidad = cantidades[i];
+                for (String categoria : menu.keySet()) {
+                    JSONObject platos = menu.getJSONObject(categoria);
+                    if (platos.has(nombrePlato)) {
+                        int precio = platos.getInt(nombrePlato);
+                        total += precio * cantidad;
+                        break;
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
     /**
      * @param args the command line arguments
      */
