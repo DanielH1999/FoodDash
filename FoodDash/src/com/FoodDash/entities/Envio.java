@@ -10,23 +10,23 @@ public class Envio {
     private int id_cliente;
     private int id_pedido;
     private int id_restaurant;
-    private int direccion;
-    private int medio_pago;
+    private String direccion;
+    private String medio_pago;
     private int precio_envio;
     private int estado;
 
     public Envio() {
     }
 
-    public Envio(int id_envio, int id_cliente, int id_pedido, int id_restaurant, int direccion, int medio_pago, 
+    public Envio(int id_envio, int id_cliente, int id_pedido, int id_restaurant, String direccion, String medio_pago, 
             int precio_envio, int estado) {
         this.setId_envio(id_envio);
         this.setId_cliente(id_cliente);
         this.setId_pedido(id_pedido);
         this.setId_restaurant(id_restaurant);
         this.setDireccion(direccion);
-        this.setMedio_pago(medio_pago);
-        this.setPrecio_envio(precio_envio);
+        this.setMedioPago(medio_pago);
+        this.setPrecioEnvio(precio_envio);
         this.setEstado(estado);
     }
 
@@ -62,27 +62,27 @@ public class Envio {
         this.id_restaurant = id_restaurant;
     }
 
-    public int getDireccion() {
+    public String getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(int direccion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
-    public int getMedio_pago() {
+    public String getMedioPago() {
         return medio_pago;
     }
 
-    public void setMedio_pago(int medio_pago) {
+    public void setMedioPago(String medio_pago) {
         this.medio_pago = medio_pago;
     }
 
-    public int getPrecio_envio() {
+    public int getPrecioEnvio() {
         return precio_envio;
     }
 
-    public void setPrecio_envio(int precio_envio) {
+    public void setPrecioEnvio(int precio_envio) {
         this.precio_envio = precio_envio;
     }
 
@@ -93,6 +93,12 @@ public class Envio {
     public void setEstado(int estado) {
         this.estado = estado;
     }
+	
+	public String getEstadoString()
+	{
+		String[] estados = {"pendiente", "en proceso", "listo", "enviado", "finalizado", "rechazado"};
+		return estados[estado];
+	}
 
     @Override
     public String toString() {

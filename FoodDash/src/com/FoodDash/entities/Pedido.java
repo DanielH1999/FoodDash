@@ -139,6 +139,11 @@ public final class Pedido {
                 suma_precio + "\ntiempo_preparacion=" + tiempo_preparacion + "\nestado=" + estado+
                 "\nclientes: " + clientes + "\nrestaurants: " + restaurants;
     }
+
+	public String getEstadoString() {
+		String[] estados = {"pendiente", "en proceso", "listo", "enviado", "finalizado", "rechazado"};
+		return estados[estado];
+	}
     
     
 }

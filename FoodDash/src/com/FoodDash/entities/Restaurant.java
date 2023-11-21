@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Restaurant {
     private int id_restaurant;
-    private int id_pedido;
+    //private int id_pedido;
     private int id_envio;
     private String nombre;
     private int telefono;
@@ -18,9 +18,9 @@ public class Restaurant {
     
     public Restaurant(){}
 
-    public Restaurant(int id_restaurant, int id_pedido, int id_envio, String nombre, int telefono) {
+    public Restaurant(int id_restaurant, /*int id_pedido,*/ int id_envio, String nombre, int telefono) {
         this.setId_restaurant(id_restaurant);
-        this.setId_pedido(id_pedido);
+        //this.setId_pedido(id_envio);
         this.setId_envio(id_envio);
         this.setNombre(nombre);
         this.setTelefono(telefono);
@@ -36,13 +36,13 @@ public class Restaurant {
         this.id_restaurant = id_restaurant;
     }
 
-    public int getId_pedido() {
-        return id_pedido;
-    }
-
-    public void setId_pedido(int id_pedido) {
-        this.id_pedido = id_pedido;
-    }
+//    public int getId_pedido() {
+//        return id_envio;
+//    }
+//
+//    public void setId_pedido(int id_envio) {
+//        this.id_envio = id_envio;
+//    }
 
     public int getId_envio() {
         return id_envio;
@@ -84,12 +84,12 @@ public class Restaurant {
         this.cantidades = cantidades;
     }
 
-//    @Override
-//    public String toString() {
-//        return "id_restaurant: "+id_restaurant+"\nid_pedido: "+id_pedido
-//               +"\nid_envio: "+id_envio+"\nnombre: "+nombre+"\ntelefono: "
-//               +telefono;
-//    }
+    public String toLongString() {
+	return "id_restaurant: "+id_restaurant
+          +"\nid_envio: "+id_envio+
+	"\nnombre: "+nombre+""
+	+ "\ntelefono: "+telefono;
+    }
     
     @Override
     public String toString()

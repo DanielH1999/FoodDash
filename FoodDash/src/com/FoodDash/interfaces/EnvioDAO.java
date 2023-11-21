@@ -4,10 +4,13 @@
  */
 package com.FoodDash.interfaces;
 
+import com.FoodDash.entities.Envio;
+
 /**
  *
  * @author d3m0n10
  */
 public interface EnvioDAO {
-    void entregar_pedido();
+	void ingresarEnvio(Envio envio);
+	public void actualizarEnvio(Envio envio);
 }

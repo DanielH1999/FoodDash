@@ -21,7 +21,7 @@ public class RestaurantDAOImpl implements RestaurantDAO {
     private final int tiempo_preparacion = 15;
 
     @Override
-    public void aceptar_pedido(Pedido pedido)
+    public void aceptarPedido(Pedido pedido)
     {
         int id_restaurant = pedido.getId_restaurant();
         int id_cliente = pedido.getId_cliente();
@@ -46,7 +46,7 @@ public class RestaurantDAOImpl implements RestaurantDAO {
             {
                 //ingreso datos del restaurant desde la tabla pedido
                 restaurant.setId_restaurant(Database.getInt("id_restaurant"));
-                restaurant.setId_pedido(Database.getInt("id_pedido"));
+                restaurant.setId_envio(Database.getInt("id_envio"));
                 restaurant.setProductos(Arrays.asList(Database.getString("productos").split(", ")));
                 restaurant.setCantidades(Arrays.asList(Database.getString("cantidades").split(",")));
                 
@@ -74,7 +74,7 @@ public class RestaurantDAOImpl implements RestaurantDAO {
     }
 
     @Override
-    public void rechazar_pedido(Pedido pedido)
+    public void rechazarPedido(Pedido pedido)
     {
         try
         {
@@ -89,7 +89,7 @@ public class RestaurantDAOImpl implements RestaurantDAO {
     }
 
     @Override
-    public void finalizar_pedido(Pedido pedido)
+    public void finalizarPedido(Pedido pedido)
     {
         try
         {

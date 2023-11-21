@@ -1,6 +1,7 @@
 package com.FoodDash.gui;
 
 import com.FoodDash.dao.ClienteDAOlmpl;
+import com.FoodDash.dao.PedidoDAOImpl;
 import com.FoodDash.dao.RestaurantDAOImpl;
 import com.FoodDash.entities.Cliente;
 import com.FoodDash.entities.Pedido;
@@ -34,7 +35,8 @@ public class Ventana extends javax.swing.JFrame
     JSpinner[] amounts;
     Pedido pedido;
 	int idR;
-    Cliente cliente = new Cliente();
+    Cliente cliente;
+	PedidoDAOImpl pedidoDAOImpl;
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -436,6 +438,8 @@ public class Ventana extends javax.swing.JFrame
         if(selectRestaurant())
         {
             pedido = new Pedido();
+			PedidoDAOImpl pedidoDAOImpl = new PedidoDAOImpl();
+			pedido.setId_pedido(pedidoDAOImpl.obtenerId_pedido());
             pedido.setId_restaurant(selectedRestaurant.getId_restaurant());
             
             menuTitleLbl.setText("Menu de "+selectedRestaurant.getNombre());
@@ -499,31 +503,70 @@ public class Ventana extends javax.swing.JFrame
     }//GEN-LAST:event_backToMenuBtnActionPerformed
 
     private void forwardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forwardBtnActionPerformed
-        try
-        {
-            if (cashButton.isSelected())
-            {
-                String cardNumber = cardNumberTxt.getText();
-                String cardExpiry = expiryDateTxt.getText();
-            }
-            Cliente cliente = new Cliente();
-            cliente.setId(Integer.parseInt(dniTxt.getText()));
-            cliente.setNombre(nameTxt.getText().toLowerCase());
-            cliente.setTelefono(Integer.parseInt(phoneTxt.getText()));
-            cliente.setDireccion(addrTxt.getText().toLowerCase());
-            
-            System.out.println(cliente);
-            
-            pedido.setId_cliente(cliente.getId());
-            
-            content.moveToFront(orderInfoPanel);
+	if (isDataEntered() == 0) {
+		try
+		{
+			if (cashButton.isSelected())
+			{
+				String cardNumber = cardNumberTxt.getText();
+				String cardExpiry = expiryDateTxt.getText();
+			}
+			cliente = new Cliente();
+			
+			ClienteDAOlmpl clienteDAOlmpl = new ClienteDAOlmpl();
+			pedidoDAOImpl = new PedidoDAOImpl();
+			
+			pedido.setClientes(pedidoDAOImpl.getClientes());
+			pedido.setRestaurants(pedidoDAOImpl.getRestaurants());
+			
+			if (clienteDAOlmpl.checkMatches(new Cliente(Integer.parseInt(dniTxt.getText()), nameTxt.getText(), Integer.parseInt(phoneTxt.getText()), addrTxt.getText().toLowerCase())) >= 0)
+			{
+				cliente = clienteDAOlmpl.obtenerCliente(Integer.parseInt(dniTxt.getText()));
+				System.out.println("El cliente ya esta registrado");
+			}
+			else
+			{
+				cliente.setId(Integer.parseInt(dniTxt.getText()));
+				cliente.setNombre(nameTxt.getText().toLowerCase());
+				cliente.setTelefono(Integer.parseInt(phoneTxt.getText()));
+				cliente.setDireccion(addrTxt.getText().toLowerCase());
+				JOptionPane.showMessageDialog(this, "Fuiste registrado", "Registro", JOptionPane.INFORMATION_MESSAGE);
+				clienteDAOlmpl.ingresarCliente(cliente);
+			}
+			
+			System.out.println(cliente);
+
+			pedido.setId_cliente(cliente.getId());
+
+			content.moveToFront(orderInfoPanel);
+		}
+		catch(NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog(this, e, "Hubo un error", JOptionPane.ERROR_MESSAGE);
         }
-        catch(NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(this, e, "Hubo un error", JOptionPane.ERROR_MESSAGE);
-        }
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(this, "Asegurese de completar todos los campos", "Dato faltante", JOptionPane.ERROR_MESSAGE);
+		}
     }//GEN-LAST:event_forwardBtnActionPerformed
 
+	private int isDataEntered()
+	{
+		if (nameTxt.getText().isBlank() || dniTxt.getText().isBlank() || phoneTxt.getText().isBlank() || addrTxt.getText().isBlank())
+		{
+			return 1; //dato de usuario faltante
+		}
+		if (cardButton.isSelected())
+		{
+			if (cardNumberTxt.getText().isBlank() || expiryDateTxt.getText().isBlank())
+			{
+				return 2; //dato de tarjeta faltante
+			}
+		}
+		return 0; // todo ok
+	}
+	
     private void updateRestaurantList()
     {
         listModel.addAll(RestaurantDAOImpl.getRestaurantList());
@@ -586,7 +629,7 @@ public class Ventana extends javax.swing.JFrame
     }
 	
 	public void updateCliente() {
-        int dniCliente = Integer.getInteger(phoneTxt.getText());
+        int dniCliente = Integer.getInteger(dniTxt.getText());
         cliente.setId(dniCliente);
         cliente.setNombre(nameTxt.getText());
         cliente.setDireccion(addrTxt.getText());

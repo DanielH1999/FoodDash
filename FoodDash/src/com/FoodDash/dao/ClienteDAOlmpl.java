@@ -90,7 +90,89 @@ public void realizarPedido(Cliente c, Pedido p, Restaurant r) throws SQLExceptio
         conexion.close();
     }
 
-    @Override
-    public void realizarPedido() {}
+//    @Override
+//    public void realizarPedido() {}
+
+	@Override
+	public void ingresarCliente(Cliente cliente) {
+	try {
+		Connection conexion = (Connection) Connector.getConnection();
+		String query = "INSERT INTO cliente (id_cliente, nombre, direccion, telefono) VALUES (?, ?, ?, ?)";
+		PreparedStatement statement = conexion.prepareStatement(query);
+		statement.setInt(1, cliente.getId());
+		statement.setString(2, cliente.getNombre());
+		statement.setString(3, cliente.getDireccion());
+		statement.setInt(4, cliente.getTelefono());
+		statement.executeUpdate();
+		conexion.close();
+	} catch (SQLException ex) {
+		Logger.getLogger(ClienteDAOlmpl.class.getName()).log(Level.SEVERE, null, ex);
+	}
+}
+
+
+	@Override
+	public void actualizarCliente(Cliente cliente) {
+		try {
+			Connection conexion = (Connection) Connector.getConnection();
+			String query = "UPDATE cliente SET nombre = ?, direccion = ?, telefono = ? WHERE id_cliente = ?";
+			PreparedStatement statement = conexion.prepareStatement(query);
+			statement.setString(1, cliente.getNombre());
+			statement.setString(2, cliente.getDireccion());
+			statement.setInt(3, cliente.getTelefono());
+			statement.setInt(4, cliente.getId());
+			statement.executeUpdate();
+			conexion.close();
+		} catch (SQLException ex) {
+			Logger.getLogger(ClienteDAOlmpl.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+	
+//	El método checkMatches es un método que busca en la base de datos un cliente que tenga los mismos valores de nombre, direccion y telefono que el objeto cliente pasado como parámetro.
+//	Si se encuentra un cliente con los mismos valores, el método devuelve el valor de id_cliente de ese cliente.
+//	De lo contrario, devuelve -1.
+	public int checkMatches(Cliente cliente)
+	{
+		int id_cliente = -1;
+		try{
+			Connection conexion = (Connection) Connector.getConnection();
+			String query = "SELECT * FROM cliente WHERE nombre = ? AND direccion = ? AND telefono = ?";
+			PreparedStatement statement = conexion.prepareStatement(query);
+			statement.setString(1, cliente.getNombre());
+			statement.setString(2, cliente.getDireccion());
+			statement.setInt(3, cliente.getTelefono());
+			ResultSet database = statement.executeQuery();
+			if (database.next())
+			{
+				return database.getInt("id_cliente");
+			}
+			conexion.close();
+		}
+		catch(SQLException e)
+		{
+			Logger.getLogger(ClienteDAOlmpl.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return id_cliente;
+	}
+	
+	public Cliente obtenerCliente(int id_cliente)
+	{
+		Cliente cliente = null;
+		try
+		{
+			Connection conexion = (Connection) Connector.getConnection();
+			String query = "SELECT * FROM cliente WHERE id_cliente = ?";
+			PreparedStatement statement = conexion.prepareStatement(query);
+			statement.setInt(1, id_cliente);
+			ResultSet database = statement.executeQuery();
+			if (database.next()) {
+				cliente = new Cliente(id_cliente, database.getString("nombre"), database.getInt("telefono"), database.getString("direccion"));
+			}
+			conexion.close();
+		}catch(SQLException e){
+			Logger.getLogger(ClienteDAOlmpl.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return cliente;
+	}
 }
     

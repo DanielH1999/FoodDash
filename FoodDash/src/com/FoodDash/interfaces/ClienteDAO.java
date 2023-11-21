@@ -4,17 +4,19 @@
  */
 package com.FoodDash.interfaces;
 
+import com.FoodDash.entities.Cliente;
+
 /**
  *
  * @author d3m0n10
  */
 public interface ClienteDAO {
-	void ingresar_cliente();
-	void actualizar_cliente();
-
-    void elegir_restaurant();
-    void seleccionar_producto();
-    void eliminar_producto();
-    void pagar();
-    void ingresar_datos();
+	void ingresarCliente(Cliente cliente);
+	void actualizarCliente(Cliente cliente);
+//
+//    void elegir_restaurant();
+//    void seleccionar_producto();
+//    void eliminar_producto();
+//    void pagar();
+//    void ingresar_datos();
 }
