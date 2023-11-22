@@ -20,7 +20,7 @@ public class RestaurantDAOImplTest {
                 pedido.setTiempo_preparacion(15);
                 pedido.setEstado(1);
         
-        rdao.rechazar_pedido(pedido);
-        rdao.aceptar_pedido(pedido);
+        rdao.rechazarPedido(pedido);
+        rdao.aceptarPedido(pedido);
     }
 }

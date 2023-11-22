@@ -521,7 +521,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="orderCancelButton" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jLabel1" alignment="1" pref="472" max="32767" attributes="0"/>
+                          <Component id="orderInfoLabel" alignment="1" pref="472" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -531,7 +531,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="orderInfoLabel" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace pref="163" max="32767" attributes="0"/>
                       <Component id="orderCancelButton" min="-2" pref="38" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -540,7 +540,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="orderInfoLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Order Info"/>
               </Properties>

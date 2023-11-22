@@ -1,15 +1,19 @@
 package com.FoodDash.gui;
 
 import com.FoodDash.dao.ClienteDAOlmpl;
+import com.FoodDash.dao.EnvioDAOImpl;
 import com.FoodDash.dao.PedidoDAOImpl;
 import com.FoodDash.dao.RestaurantDAOImpl;
 import com.FoodDash.entities.Cliente;
+import com.FoodDash.entities.Envio;
 import com.FoodDash.entities.Pedido;
 import com.FoodDash.entities.Restaurant;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.File;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.Arrays;
 import javax.swing.DefaultListModel;
@@ -17,9 +21,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 public class Ventana extends javax.swing.JFrame
 {
+
+    private String medioPago;
     public Ventana()
     {
         initComponents();
@@ -79,7 +88,7 @@ public class Ventana extends javax.swing.JFrame
         priceLbl = new javax.swing.JLabel();
         cardIconLbl = new javax.swing.JLabel();
         orderInfoPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        orderInfoLabel = new javax.swing.JLabel();
         orderCancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -347,7 +356,7 @@ public class Ventana extends javax.swing.JFrame
 
         orderInfoPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Order Info");
+        orderInfoLabel.setText("Order Info");
 
         orderCancelButton.setForeground(new java.awt.Color(255, 255, 255));
         orderCancelButton.setText("Cancelar pedido");
@@ -366,14 +375,14 @@ public class Ventana extends javax.swing.JFrame
                 .addContainerGap()
                 .addGroup(orderInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(orderCancelButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+                    .addComponent(orderInfoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
                 .addContainerGap())
         );
         orderInfoPanelLayout.setVerticalGroup(
             orderInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(orderInfoPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(orderInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
                 .addComponent(orderCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -454,10 +463,11 @@ public class Ventana extends javax.swing.JFrame
         {
             String[] cantidades = new String[amounts.length];
             int[] values = getOrderAmounts(amounts);
-            
+            Integer[] cantidadesInt = new Integer[values.length];
             for (int i = 0; i < amounts.length; i++)
             {
                 cantidades[i] = String.valueOf(values[i]);
+                cantidadesInt[i] = Integer.valueOf(values[i]);
             }
             
             String[] productos = getOrderItems(values);
@@ -469,7 +479,7 @@ public class Ventana extends javax.swing.JFrame
             System.out.println(Arrays.toString(cantidades));
             
             cardIconLbl.setText("");
-            priceLbl.setText("$");
+            //priceLbl.setText("$"+getTotalPedido(productos,cantidadesInt));
             content.moveToFront(loginPanel);
         }
         else
@@ -492,10 +502,12 @@ public class Ventana extends javax.swing.JFrame
 
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashButtonActionPerformed
         hideCardInfo(true);
+        medioPago = "efectivo";
     }//GEN-LAST:event_cashButtonActionPerformed
 
     private void cardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardButtonActionPerformed
         hideCardInfo(false);
+        medioPago = "tarjeta";
     }//GEN-LAST:event_cardButtonActionPerformed
 
     private void backToMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMenuBtnActionPerformed
@@ -535,10 +547,26 @@ public class Ventana extends javax.swing.JFrame
 			}
 			
 			System.out.println(cliente);
+                        
+                        Envio envio = new Envio();
+                        envio.setDireccion(cliente.getDireccion());
+                        envio.setEstado(pedido.getEstado());
+                        envio.setId_cliente(cliente.getId());
+                        envio.setId_restaurant(selectedRestaurant.getId_restaurant());
+                        envio.setMedioPago(medioPago);
+                        envio.setPrecioEnvio(0);
+                        EnvioDAOImpl envioDAOImpl = new EnvioDAOImpl();
+                        envioDAOImpl.ingresarEnvio(envio);
 
 			pedido.setId_cliente(cliente.getId());
 
+                        System.out.println("pedido: "+pedido);
+                        
+                        System.out.println("envio: "+envio);
+                        orderInfoLabel.setText("<html>"+"Tu pedido es el numero"+pedido.getId_pedido()
+                        +"<br>Estado: "+pedido.getEstadoString()+"<br>Tiempo de espera:"+pedido.getTiempo_preparacion()+"</html>");
 			content.moveToFront(orderInfoPanel);
+                        JOptionPane.showMessageDialog(this, "¡Pedido realizado con exito!", "Estado del pedido", JOptionPane.INFORMATION_MESSAGE);
 		}
 		catch(NumberFormatException e)
 		{
@@ -606,7 +634,7 @@ public class Ventana extends javax.swing.JFrame
         File[] images = imageDir.listFiles();
         
         try
-        {
+        { //FIX BUG HAMBURGUESERIA
             amounts = new JSpinner[images.length];
             for (int i = 0; i < images.length; i++)
             {
@@ -694,11 +722,12 @@ public class Ventana extends javax.swing.JFrame
         }
         return false;
     }
-
+    
+    
 	private int getTotalPedido(String[] nombresPlatos, Integer[] cantidades) {
         int total = 0;
         try {
-            JSONObject menu = new JSONObject(menuJson);
+            JSONObject menu = new JSONObject();
             for (int i = 0; i < nombresPlatos.length; i++) {
                 String nombrePlato = nombresPlatos[i];
                 int cantidad = cantidades[i];
@@ -715,23 +744,6 @@ public class Ventana extends javax.swing.JFrame
             e.printStackTrace();
         }
         return total;
-    }
-	public void insertPedido() throws SQLException {
-        Integer[] values = getOrderAmounts(amounts);
-        ArrayList<Integer> listCantidades = new ArrayList<>(Arrays.asList(values));
-        
-        ArrayList<String> listProductos = new ArrayList<>(Arrays.asList(getOrderItems(values)));      
-        
-        int monto = getTotalPedido(getOrderItems(values), values);
-        
-        Pedido pedidoObjeto = new Pedido(0, cliente.getId(), idR, listCantidades, listProductos, monto, 10, 2);
-        
-        ClienteDAOlmpl cdao = new ClienteDAOlmpl();
-        
-        cdao.realizarPedido(cliente, pedidoObjeto, idR);
-
-	pedido = pedidoObjeto;
-    
     }
     /**
      * @param args the command line arguments
@@ -789,7 +801,6 @@ public class Ventana extends javax.swing.JFrame
     private javax.swing.JTextField expiryDateTxt;
     private javax.swing.JButton forwardBtn;
     private javax.swing.JPanel headerPanel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel loginPanel;
@@ -801,6 +812,7 @@ public class Ventana extends javax.swing.JFrame
     private javax.swing.JTextField nameTxt;
     private javax.swing.JButton orderBtn;
     private javax.swing.JButton orderCancelButton;
+    private javax.swing.JLabel orderInfoLabel;
     private javax.swing.JPanel orderInfoPanel;
     private javax.swing.JLabel phoneLbl;
     private javax.swing.JTextField phoneTxt;

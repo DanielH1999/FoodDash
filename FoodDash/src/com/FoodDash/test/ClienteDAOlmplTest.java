@@ -12,7 +12,7 @@ public class ClienteDAOlmplTest {
     public static void main(String[] args) throws SQLException {
         Cliente cliente = new Cliente(44983341, "Gilberto Funes", 1100293929, "Rivadavia 402");
         
-        Restaurant restaurante = new Restaurant(2, 1, 1, "Hamburgueseria", 1145654777);
+        Restaurant restaurante = new Restaurant(2, /*1, */1, "Hamburgueseria", 1145654777);
         
         Pedido pedido = new Pedido();
                 pedido.setId_pedido(0);

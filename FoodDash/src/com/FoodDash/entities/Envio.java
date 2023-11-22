@@ -15,11 +15,11 @@ public class Envio {
     private int precio_envio;
     private int estado;
 
-    public Envio() {
-    }
+    public Envio() {}
 
-    public Envio(int id_envio, int id_cliente, int id_pedido, int id_restaurant, String direccion, String medio_pago, 
-            int precio_envio, int estado) {
+    public Envio(int id_envio, int id_cliente, int id_pedido, int id_restaurant,
+            String direccion, String medio_pago, 
+           int precio_envio, int estado) {
         this.setId_envio(id_envio);
         this.setId_cliente(id_cliente);
         this.setId_pedido(id_pedido);
