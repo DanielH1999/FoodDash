@@ -716,6 +716,21 @@ public class Ventana extends javax.swing.JFrame
         }
         return total;
     }
+	public void insertPedido() throws SQLException {
+        Integer[] values = getOrderAmounts(amounts);
+        ArrayList<Integer> listCantidades = new ArrayList<>(Arrays.asList(values));
+        
+        ArrayList<String> listProductos = new ArrayList<>(Arrays.asList(getOrderItems(values)));      
+        
+        int monto = getTotalPedido(getOrderItems(values), values);
+        
+        Pedido pedidoObjeto = new Pedido(0, cliente.getId(), idR, listCantidades, listProductos, monto, 10, 2);
+        
+        ClienteDAOlmpl cdao = new ClienteDAOlmpl();
+        
+        cdao.realizarPedido(cliente, pedidoObjeto, idR);
+    
+    }
     /**
      * @param args the command line arguments
      */
