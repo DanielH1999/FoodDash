@@ -729,6 +729,8 @@ public class Ventana extends javax.swing.JFrame
         ClienteDAOlmpl cdao = new ClienteDAOlmpl();
         
         cdao.realizarPedido(cliente, pedidoObjeto, idR);
+
+	pedido = pedidoObjeto;
     
     }
     /**
