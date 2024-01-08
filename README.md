@@ -1,6 +1,6 @@
 # FoodDash
 
-## Este proyecto consiste en una aplicacion de pedir comida junto con una base de datos. Tiene una ventana que intercambia paneles para que el usuario pueda interactuar con su contenido y la base de datos.
+Este proyecto consiste en una aplicacion de pedir comida junto con una base de datos. Tiene una ventana que intercambia paneles para que el usuario pueda interactuar con su contenido y la base de datos.
 
 ## Seleccion de restaurant
 ![Screenshot from 2024-01-07 14-38-23](https://github.com/DanielH1999/FoodDash/assets/86022708/5382d451-b2cc-42e4-ae56-074342a7a4ab)
